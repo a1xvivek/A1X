@@ -4,29 +4,122 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A1xVivek | Portfolio</title>
+
   <style>
+    /* THEME VARIABLES */
+    :root {
+      --bg1: #0f0c29;
+      --bg2: #302b63;
+      --bg3: #24243e;
+      --text: #ffffff;
+      --accent: #00ffff;
+      --card: rgba(255,255,255,0.05);
+    }
+
+    body.light {
+      --bg1: #ffffff;
+      --bg2: #e6e6e6;
+      --bg3: #dcdcdc;
+      --text: #000000;
+      --accent: #0077ff;
+      --card: rgba(0,0,0,0.05);
+    }
+
+    /* GLOBAL */
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, var(--bg1), var(--bg2), var(--bg3));
+      color: var(--text);
+      scroll-behavior: smooth;
+      transition: 0.5s;
       overflow-x: hidden;
     }
+
+    /* PARTICLE BACKGROUND */
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* NAVIGATION */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      z-index: 1000;
+    }
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: var(--text);
+      text-shadow: 0 0 10px var(--accent);
+    }
+
+    /* THEME TOGGLE */
+    .toggle-btn {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: var(--accent);
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+      z-index: 1000;
+    }
+
+    /* HEADER */
     header {
       text-align: center;
-      padding: 3rem;
-      background: rgba(0,0,0,0.6);
+      padding: 7rem 2rem 3rem;
       animation: fadeInDown 2s ease;
     }
-    header h1 {
-      margin: 0;
+    header img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    /* TYPING ANIMATION */
+    .typing {
       font-size: 3rem;
-      text-shadow: 0 0 15px #00ffff;
+      font-weight: bold;
+      border-right: 3px solid var(--accent);
+      width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 4s steps(20) forwards, blink 0.7s infinite;
     }
-    header p {
-      font-size: 1.2rem;
-      color: #ccc;
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
     }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* SECTIONS */
     section {
       padding: 3rem;
       max-width: 900px;
@@ -34,40 +127,85 @@
       animation: fadeInUp 2s ease;
     }
     h2 {
-      border-bottom: 2px solid #00ffff;
+      border-bottom: 2px solid var(--accent);
       padding-bottom: 0.5rem;
       margin-bottom: 1.5rem;
-      text-shadow: 0 0 10px #00ffff;
+      text-shadow: 0 0 10px var(--accent);
     }
-    .project {
-      background: rgba(255,255,255,0.05);
+
+    /* SKILLS */
+    .skill {
+      margin-bottom: 1.5rem;
+    }
+    .skill-bar {
+      width: 100%;
+      height: 12px;
+      background: var(--card);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .skill-level {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      animation: fill 2s forwards;
+    }
+    @keyframes fill {
+      from { width: 0%; }
+      to { width: var(--level); }
+    }
+
+    /* PROJECT GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: var(--card);
       padding: 1rem;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px var(--accent);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    /* CONTACT FORM */
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
       margin-bottom: 1rem;
       border-radius: 8px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: none;
+      outline: none;
+      background: var(--card);
+      color: var(--text);
     }
-    .project:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 0 20px #00ffff;
+    form button {
+      padding: 10px 20px;
+      background: var(--accent);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
     }
+
+    /* FOOTER */
     footer {
       text-align: center;
       padding: 1rem;
-      background: rgba(0,0,0,0.6);
-      font-size: 0.9rem;
-      animation: fadeIn 3s ease;
-    }
-    a {
-      color: #00ffff;
-      text-decoration: none;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-    }
-    a:hover {
-      color: #fff;
-      text-shadow: 0 0 10px #00ffff;
+      background: rgba(0,0,0,0.5);
+      margin-top: 2rem;
     }
 
-    /* Animations */
+    /* ANIMATIONS */
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -76,47 +214,140 @@
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>A1xVivek</h1>
-    <p>Creative Developer | Designer | Innovator</p>
-  </header>
 
-  <section>
-    <h2>About Me</h2>
-    <p>Hello! I’m A1xVivek, passionate about building creative digital experiences. I enjoy blending design and technology to craft unique projects.</p>
-  </section>
+<canvas id="particles"></canvas>
 
-  <section>
-    <h2>Projects</h2>
-    <div class="project">
+<nav>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<div class="toggle-btn" onclick="toggleTheme()">Toggle Theme</div>
+
+<header>
+  <img src="https://via.placeholder.com/150" alt="Profile Photo">
+  <div class="typing">Hi, I'm A1xVivek</div>
+  <p>Creative Developer • Designer • Innovator</p>
+</header>
+
+<section id="about">
+  <h2>About Me</h2>
+  <p>I’m A1xVivek — a creative developer who loves building stylish, animated, and futuristic web experiences.</p>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+
+  <div class="skill">
+    <div>HTML</div>
+    <div class="skill-bar"><div class="skill-level" style="--level: 90%;"></div></div>
+  </div>
+
+  <div class="skill">
+    <div>CSS</div>
+    <div class="skill-bar"><div class="skill-level" style="--level: 85%;"></div></div>
+  </div>
+
+  <div class="skill">
+    <div>JavaScript</div>
+    <div class="skill-bar"><div class="skill-level" style="--level: 70%;"></div></div>
+  </div>
+
+  <div class="skill">
+    <div>Design</div>
+    <div class="skill-bar"><div class="skill-level" style="--level: 80%;"></div></div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+
+  <div class="grid">
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200">
       <h3>Project One</h3>
-      <p>A web app that showcases cosmic villain designs with interactive features.</p>
+      <p>Cosmic villain design web app.</p>
     </div>
-    <div class="project">
+
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200">
       <h3>Project Two</h3>
-      <p>A portfolio site hosted on GitHub Pages, demonstrating clean design and responsive layout.</p>
+      <p>Portfolio website with animations.</p>
     </div>
-    <div class="project">
+
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200">
       <h3>Project Three</h3>
-      <p>Creative anime-inspired digital art gallery powered by HTML and CSS.</p>
+      <p>Anime-inspired art gallery.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <h2>Contact</h2>
-    <p>📧 Email: <a href="mailto:yourname@example.com">yourname@example.com</a></p>
-    <p>🌐 GitHub: <a href="https://github.com/yourusername">github.com/yourusername</a></p>
-  </section>
+<section id="contact">
+  <h2>Contact</h2>
 
-  <footer>
-    <p>© 2025 A1xVivek | Built with ❤️ and GitHub Pages</p>
-  </footer>
+  <form>
+    <input type="text" placeholder="Your Name">
+    <input type="email" placeholder="Your Email">
+    <textarea rows="5" placeholder="Your Message"></textarea>
+    <button>Send Message</button>
+  </form>
+</section>
+
+<footer>
+  © 2025 A1xVivek | Built with ❤️ and GitHub Pages
+</footer>
+
+<script>
+  function toggleTheme() {
+    document.body.classList.toggle("light");
+  }
+
+  /* PARTICLE BACKGROUND */
+  const canvas = document.getElementById("particles");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+
+  for (let i = 0; i < 80; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 3,
+      speedX: (Math.random() - 0.5) * 1,
+      speedY: (Math.random() - 0.5) * 1
+    });
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+      p.x += p.speedX;
+      p.y += p.speedY;
+
+      if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
+      ctx.fillStyle = "rgba(0,255,255,0.7)";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(animateParticles);
+  }
+
+  animateParticles();
+</script>
+
 </body>
 </html>
