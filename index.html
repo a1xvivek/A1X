@@ -100,23 +100,10 @@
       box-shadow: 0 0 20px var(--accent);
       margin-bottom: 1rem;
     }
-
-    /* TYPING ANIMATION */
-    .typing {
+    header h1 {
       font-size: 3rem;
-      font-weight: bold;
-      border-right: 3px solid var(--accent);
-      width: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: typing 4s steps(20) forwards, blink 0.7s infinite;
-    }
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-    @keyframes blink {
-      50% { border-color: transparent; }
+      margin: 0;
+      text-shadow: 0 0 15px var(--accent);
     }
 
     /* SECTIONS */
@@ -232,8 +219,16 @@
 
 <header>
   <img src="https://via.placeholder.com/150" alt="Profile Photo">
-  <div class="typing">Hi, I'm A1xVivek</div>
+
+  <h1>Hi, I'm A1xVivek</h1>
+
   <p>Creative Developer • Designer • Innovator</p>
+
+  <a href="resume.pdf" download>
+    <button style="padding:10px 20px;border:none;border-radius:20px;background:var(--accent);cursor:pointer;font-weight:bold;">
+      Download Resume
+    </button>
+  </a>
 </header>
 
 <section id="about">
